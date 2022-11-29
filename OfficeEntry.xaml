@@ -1,0 +1,18 @@
+﻿<Window x:Class="Jūsų_IT.OfficeEntry"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Jūsų_IT"
+        mc:Ignorable="d"
+        Title="OfficeEntry" Height="450" Width="800">
+    <Grid>
+        <Label Content="Pavadinimas&#xD;&#xA;" HorizontalAlignment="Left" Margin="54,32,0,0" VerticalAlignment="Top" Height="26" Width="99"/>
+        <Button Content="Pridėti darbovietę" HorizontalAlignment="Left" Margin="135,122,0,0" VerticalAlignment="Top" Width="176" Click="AddOffice_Click"/>
+        <TextBox x:Name="OfficeTitle" HorizontalAlignment="Left" Margin="135,36,0,0" TextWrapping="Wrap" Text="Lazdijai office" VerticalAlignment="Top" Width="120"/>
+        <Label Content="Adresas" HorizontalAlignment="Left" Margin="63,75,0,0" VerticalAlignment="Top"/>
+        <TextBox x:Name="OfficeLocation" HorizontalAlignment="Left" Margin="135,79,0,0" TextWrapping="Wrap" Text="Lazdiju str. 50-37" VerticalAlignment="Top" Width="352"/>
+        <Button Content="Atšaukti" HorizontalAlignment="Left" Margin="340,122,0,0" VerticalAlignment="Top" Click="CancelOffice_Click"/>
+
+    </Grid>
+</Window>
