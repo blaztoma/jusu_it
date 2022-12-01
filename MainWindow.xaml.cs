@@ -51,9 +51,9 @@ namespace Jūsų_IT
         private void btn_open_file_Click(object sender, RoutedEventArgs e)
         {
             OpenFileDialog open_file_dialog = new OpenFileDialog();
-            open_file_dialog.Filter = "Text Files (*.txt)|*.txt| All Files (*.*)| *.*";
+            open_file_dialog.Filter = "XML Files (*.xml)| *.xml| All Files (*.*)|*.*";
 
-            if(open_file_dialog.ShowDialog() == true)
+            if (open_file_dialog.ShowDialog() == true)
             {
                 XmlSerializer serializer =  new XmlSerializer(typeof(List<Office>));
                 using (Stream reader = new FileStream(open_file_dialog.FileName, FileMode.Open))
@@ -68,8 +68,7 @@ namespace Jūsų_IT
         private void btn_save_file_Click(object sender, RoutedEventArgs e)
         {
             SaveFileDialog saveFileDialog = new SaveFileDialog();
-
-            saveFileDialog.Filter = "Text Files (*.txt)| *.txt| All Files (*.*)|*.*";
+            saveFileDialog.Filter = "XML Files (*.xml)| *.xml| All Files (*.*)|*.*";
 
             if(saveFileDialog.ShowDialog() == true)
             {
@@ -85,31 +84,50 @@ namespace Jūsų_IT
             OfficeEntry officeEntryWindow = new OfficeEntry();
             if (officeEntryWindow.ShowDialog() == true)
             {
-                offices.Add(new Office((offices.Max(t => t.OfficeId) + 1), officeEntryWindow.OfficeTitle.Text, officeEntryWindow.OfficeLocation.Text));
-                Offices.Items.Refresh();
+                try
+                {
+                    offices.Add(new Office((offices.Max(t => t.OfficeId) + 1), officeEntryWindow.OfficeTitle.Text, officeEntryWindow.OfficeLocation.Text));
+                    Offices.Items.Refresh();
+                }
+                catch (InvalidOperationException)
+                {
+                    offices.Add(new Office(1, officeEntryWindow.OfficeTitle.Text, officeEntryWindow.OfficeLocation.Text));
+                    Offices.Items.Refresh();
+                }
+
             }
         }
 
         private void RemoveOffice_Click(object sender, RoutedEventArgs e)
         {
-            Office? selectedOffice = Offices.SelectedItem as Office;
-            int index = offices.FindIndex(s => s.OfficeId == selectedOffice.OfficeId);
-            if (index != -1) offices.RemoveAt(index);
-            Offices.Items.Refresh();
+            try
+            {
+                Office? selectedOffice = Offices.SelectedItem as Office;
+                int index = offices.FindIndex(s => s.OfficeId == selectedOffice.OfficeId);
+                if (index != -1) offices.RemoveAt(index);
+                Offices.Items.Refresh();
+            }
+            catch (NullReferenceException) { MessageBox.Show("Nieko Nepasirinkote!"); }
         }
 
         private void EditOffice_Click(object sender, RoutedEventArgs e)
         {
-            Office? selectedOffice = Offices.SelectedItem as Office;
-            OfficeEntry officeEntryWindow = new OfficeEntry(selectedOffice.OfficeId, selectedOffice.Name, selectedOffice.Location);
-            if (officeEntryWindow.ShowDialog() == true)
+            try
             {
-                int index = offices.FindIndex(s => s.OfficeId == officeEntryWindow.officeId);
+                Office? selectedOffice = Offices.SelectedItem as Office;
+                OfficeEntry officeEntryWindow = new OfficeEntry(selectedOffice.OfficeId, selectedOffice.Name, selectedOffice.Location);
+                if (officeEntryWindow.ShowDialog() == true)
+                {
+                    int index = offices.FindIndex(s => s.OfficeId == officeEntryWindow.officeId);
 
-                if (index != -1)
-                    offices[index] = new Office(officeEntryWindow.officeId, officeEntryWindow.OfficeTitle.Text, officeEntryWindow.OfficeLocation.Text);
-                Offices.Items.Refresh();
+                    if (index != -1)
+                    {
+                        offices[index] = new Office(officeEntryWindow.officeId, officeEntryWindow.OfficeTitle.Text, officeEntryWindow.OfficeLocation.Text);
+                    }
+                    Offices.Items.Refresh();
+                }
             }
+            catch (NullReferenceException) { MessageBox.Show("Nieko Nepasirinkote!"); }
         }
 
         private void Offices_Selected(object sender, RoutedEventArgs e)
