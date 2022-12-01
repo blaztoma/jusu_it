@@ -11,6 +11,7 @@ namespace Jūsų_IT
         public int OfficeId { get; set; }
         public string Name { get; set; }
         public string Location { get; set; }
+        public List<Lobby> Lobbies { get; set; }
 
         public Office()
         {
@@ -22,6 +23,17 @@ namespace Jūsų_IT
             OfficeId = id;
             Name = name;
             Location = location;
+            Lobbies = new List<Lobby>();
+
+            PopulateLobbies();
+        }
+
+        public void PopulateLobbies()
+        {
+            Lobbies.Clear();
+            Lobbies.Add(new Lobby(1, "Kaunas office Lobby " + OfficeId.ToString(), "Student str. 50"));
+            Lobbies.Add(new Lobby(2, "Klaipeda office Lobby " + OfficeId.ToString(), "Pilies str. 50"));
+            Lobbies.Add(new Lobby(3, "Veisiejai Lobby " + OfficeId.ToString(), "Dariaus ir Gireno str. 30"));
         }
 
     }

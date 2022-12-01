@@ -112,6 +112,15 @@ namespace Jūsų_IT
             }
         }
 
+        private void Offices_Selected(object sender, RoutedEventArgs e)
+        {
+        }
+
+        private void Offices_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            Office? selectedOffice = Offices.SelectedItem as Office;
+            Lobbies.ItemsSource = selectedOffice.Lobbies;
+        }
     }
 
     public partial class App : Application
