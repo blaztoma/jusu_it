@@ -37,9 +37,9 @@
 
                     <MenuItem Header="Taisa">
 
-                        <MenuItem Header="_Pridėti darbovietę"/>
-                        <MenuItem Header="_Redaguoti"/>
-                        <MenuItem Header="_Pašalinti"/>
+                        <MenuItem Header="_Pridėti darbovietę" Click="AddOffice_Click"/>
+                <MenuItem Header="_Redaguoti" Click="EditOffice_Click"/>
+                <MenuItem Header="_Pašalinti" Click="RemoveOffice_Click"/>
 
                     </MenuItem>
 
@@ -57,19 +57,11 @@
 
             <DataGrid Grid.Row="3" Name="Offices" SelectionChanged="Offices_SelectionChanged"/>
             <StackPanel Grid.Row="2" Orientation="Horizontal">
-                <Button Content="Pridėti darbovietę" Grid.Row="2" VerticalAlignment="Center" Click="AddOffice_Click"/>
-                <Button Content="Redaguoti darbovietę" Grid.Row="2" VerticalAlignment="Center" Click="EditOffice_Click"/>
-                <Button Content="Šalinti darbovietę" Grid.Row="2" VerticalAlignment="Center" Click="RemoveOffice_Click" />
+                <Button Content="Pridėti darbovietę" Grid.Row="2" VerticalAlignment="Center" Margin="5" Click="AddOffice_Click"/>
+                <Button Content="Redaguoti darbovietę" Grid.Row="2" VerticalAlignment="Center" Margin="5" Click="EditOffice_Click"/>
+                <Button Content="Šalinti darbovietę" Grid.Row="2" VerticalAlignment="Center" Margin="5" Click="RemoveOffice_Click" />
             </StackPanel>
             <DataGrid Grid.Row="4" Name="Lobbies"/>
-
-                <!--<StackPanel Grid.Row="3" Orientation="Horizontal">
-
-            <Button x:Name="btn_user1" Click="btn_user1_Click">Prideti vartotoja1</Button>
-            <Button x:Name="btn_user2" Click="btn_user2_Click">Prideti vartotoja2</Button>
-
-        </StackPanel>-->
-
 
     </Grid>
 
