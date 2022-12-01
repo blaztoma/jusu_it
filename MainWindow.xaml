@@ -20,9 +20,11 @@
                     <RowDefinition Height="30"/>
                     <RowDefinition Height="60"/>
                     <RowDefinition Height="30"/>
-                    <RowDefinition Height="200"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="30"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="30"/>
                     <RowDefinition Height ="*"/>
-
                 </Grid.RowDefinitions>
 
              
@@ -61,9 +63,21 @@
                 <Button Content="Redaguoti darbovietę" Grid.Row="2" VerticalAlignment="Center" Click="EditOffice_Click"/>
                 <Button Content="Šalinti darbovietę" Grid.Row="2" VerticalAlignment="Center" Click="RemoveOffice_Click" />
             </StackPanel>
-            <DataGrid Grid.Row="4" Name="Lobbies"/>
+            <DataGrid Grid.Row="5" Name="Lobbies" SelectionChanged="Lobbies_SelectionChanged"/>
+        <StackPanel Grid.Row="4" Orientation="Horizontal">
+            <Button Content="Pridėti kambarį" Grid.Row="2" VerticalAlignment="Center" Click="AddOffice_Click"/>
+            <Button Content="Redaguoti kambarį" Grid.Row="2" VerticalAlignment="Center" Click="EditOffice_Click"/>
+            <Button Content="Šalinti kambarį" Grid.Row="2" VerticalAlignment="Center" Click="RemoveOffice_Click" />
+        </StackPanel>
+        <DataGrid Grid.Row="7" Name="Stuff" SourceUpdated="Stuff_SourceUpdated" RowEditEnding="Stuff_RowEditEnding"/>
+        <StackPanel Grid.Row="6" Orientation="Horizontal">
+            <Button Content="Pridėti daiktą" Grid.Row="2" VerticalAlignment="Center" Click="AddOffice_Click"/>
+            <Button Content="Redaguoti daiktą" Grid.Row="2" VerticalAlignment="Center" Click="EditOffice_Click"/>
+            <Button Content="Šalinti daiktą" Grid.Row="2" VerticalAlignment="Center" Click="RemoveOffice_Click" />
+            <Label Name="Kiekis" Content="Kiekis: 0"/>
+        </StackPanel>
 
-                <!--<StackPanel Grid.Row="3" Orientation="Horizontal">
+        <!--<StackPanel Grid.Row="3" Orientation="Horizontal">
 
             <Button x:Name="btn_user1" Click="btn_user1_Click">Prideti vartotoja1</Button>
             <Button x:Name="btn_user2" Click="btn_user2_Click">Prideti vartotoja2</Button>

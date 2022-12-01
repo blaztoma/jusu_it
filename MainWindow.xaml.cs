@@ -119,7 +119,25 @@ namespace Jūsų_IT
         private void Offices_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             Office? selectedOffice = Offices.SelectedItem as Office;
-            Lobbies.ItemsSource = selectedOffice.Lobbies;
+            if (selectedOffice != null) Lobbies.ItemsSource = selectedOffice.Lobbies;
+        }
+
+        private void Lobbies_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            Lobby? selectedLobby = Lobbies.SelectedItem as Lobby;
+            Stuff.ItemsSource = selectedLobby?.Stuff;
+            Kiekis.Content = "Kiekis: " + selectedLobby?.Stuff.Count.ToString();
+        }
+
+        private void Stuff_SourceUpdated(object sender, DataTransferEventArgs e)
+        {
+            Kiekis.Content = Stuff.Items.Count.ToString();
+        }
+
+        private void Stuff_RowEditEnding(object sender, DataGridRowEditEndingEventArgs e)
+        {
+            Lobby? selectedLobby = Lobbies.SelectedItem as Lobby;
+            Kiekis.Content = "Kiekis: " + selectedLobby?.Stuff.Count.ToString();
         }
     }
 

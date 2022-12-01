@@ -31,9 +31,9 @@ namespace Jūsų_IT
         public void PopulateLobbies()
         {
             Lobbies.Clear();
-            Lobbies.Add(new Lobby(1, "Kaunas office Lobby " + OfficeId.ToString(), "Student str. 50"));
-            Lobbies.Add(new Lobby(2, "Klaipeda office Lobby " + OfficeId.ToString(), "Pilies str. 50"));
-            Lobbies.Add(new Lobby(3, "Veisiejai Lobby " + OfficeId.ToString(), "Dariaus ir Gireno str. 30"));
+            Lobbies.Add(new Lobby("Kaunas office Lobby " + OfficeId.ToString(), "Student str. 50"));
+            Lobbies.Add(new Lobby("Klaipeda office Lobby " + OfficeId.ToString(), "Pilies str. 50"));
+            Lobbies.Add(new Lobby("Veisiejai Lobby " + OfficeId.ToString(), "Dariaus ir Gireno str. 30"));
         }
 
     }
