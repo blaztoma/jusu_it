@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Jūsų_IT"
         mc:Ignorable="d"
-        Title="OfficeEntry" Height="450" Width="800">
+        Title="OfficeEntry" Height="201" Width="516">
     <Grid>
         <Label Content="Pavadinimas&#xD;&#xA;" HorizontalAlignment="Left" Margin="54,32,0,0" VerticalAlignment="Top" Height="26" Width="99"/>
         <Button Content="Pridėti darbovietę" HorizontalAlignment="Left" Margin="135,122,0,0" VerticalAlignment="Top" Width="176" Click="AddOffice_Click"/>

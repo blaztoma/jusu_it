@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 
 namespace Jūsų_IT
 {
@@ -11,8 +12,8 @@ namespace Jūsų_IT
         public int OfficeId { get; set; }
         public string Name { get; set; }
         public string Location { get; set; }
-        public List<Lobby> Lobbies { get; set; }
-
+        public List<Lobby> lobbies { get; set; }
+        
         public Office()
         {
 
@@ -23,17 +24,26 @@ namespace Jūsų_IT
             OfficeId = id;
             Name = name;
             Location = location;
-            Lobbies = new List<Lobby>();
 
-            PopulateLobbies();
+            lobbies = new List<Lobby>();
         }
 
-        public void PopulateLobbies()
+        public void PopulateLobbies(string name, int number)
         {
-            Lobbies.Clear();
-            Lobbies.Add(new Lobby("Kaunas office Lobby " + OfficeId.ToString(), "Student str. 50"));
-            Lobbies.Add(new Lobby("Klaipeda office Lobby " + OfficeId.ToString(), "Pilies str. 50"));
-            Lobbies.Add(new Lobby("Veisiejai Lobby " + OfficeId.ToString(), "Dariaus ir Gireno str. 30"));
+            try
+            {
+                lobbies.Clear();
+                lobbies.Add(new Lobby("Klaipeda office Lobby " + OfficeId.ToString(), 1));
+                lobbies.Add(new Lobby(name, number));
+            }
+            catch (NullReferenceException)
+            {
+                lobbies.Add(new Lobby(name, number));
+                
+            }
+                
+            
+            
         }
 
     }

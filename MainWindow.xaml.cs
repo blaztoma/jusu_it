@@ -130,21 +130,23 @@ namespace Jūsų_IT
             catch (NullReferenceException) { MessageBox.Show("Nieko Nepasirinkote!"); }
         }
 
-        private void Offices_Selected(object sender, RoutedEventArgs e)
-        {
-        }
 
         private void Offices_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             Office? selectedOffice = Offices.SelectedItem as Office;
-            if (selectedOffice != null) Lobbies.ItemsSource = selectedOffice.Lobbies;
+            if (selectedOffice != null) Lobbies.ItemsSource = selectedOffice.lobbies;
         }
 
         private void Lobbies_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            Lobby? selectedLobby = Lobbies.SelectedItem as Lobby;
-            Stuff.ItemsSource = selectedLobby?.Stuff;
-            Kiekis.Content = "Kiekis: " + selectedLobby?.Stuff.Count.ToString();
+            try
+            {
+                Lobby? selectedLobby = Lobbies.SelectedItem as Lobby;
+                Stuff.ItemsSource = selectedLobby?.stuff;
+                Kiekis.Content = "Kiekis: " + selectedLobby?.stuff.Count.ToString();
+            }
+            catch (NullReferenceException) { MessageBox.Show("Nieko Nepasirinkote"); }
+
         }
 
         private void Stuff_SourceUpdated(object sender, DataTransferEventArgs e)
@@ -155,7 +157,28 @@ namespace Jūsų_IT
         private void Stuff_RowEditEnding(object sender, DataGridRowEditEndingEventArgs e)
         {
             Lobby? selectedLobby = Lobbies.SelectedItem as Lobby;
-            Kiekis.Content = "Kiekis: " + selectedLobby?.Stuff.Count.ToString();
+            Kiekis.Content = "Kiekis: " + selectedLobby?.stuff.Count.ToString();
+        }
+
+        private void AddLobby_Click(object sender, RoutedEventArgs e)
+        {
+            LobbyEntry lobbyEntryWindow = new LobbyEntry();
+            Office office = new Office();
+
+            if (lobbyEntryWindow.ShowDialog() == true)
+            {
+                office.PopulateLobbies(lobbyEntryWindow.LobbyTitle.Text, Int32.Parse(lobbyEntryWindow.LobbyNumber.Text));
+            }
+        }
+
+        private void EditLobby_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void RemoveLobby_Click(object sender, RoutedEventArgs e)
+        {
+
         }
     }
 

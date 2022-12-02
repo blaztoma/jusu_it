@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Jūsų_IT"
         mc:Ignorable="d"
-        Title="MainWindow" Height="500" Width="600">
+        Title="MainWindow" Height="540" Width="600">
 
        
             <Grid ShowGridLines="True">
@@ -20,9 +20,9 @@
                     <RowDefinition Height="30"/>
                     <RowDefinition Height="60"/>
                     <RowDefinition Height="30"/>
-                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="101"/>
                     <RowDefinition Height="30"/>
-                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="121"/>
                     <RowDefinition Height="30"/>
                     <RowDefinition Height ="*"/>
                 </Grid.RowDefinitions>
@@ -65,9 +65,9 @@
             </StackPanel>
             <DataGrid Grid.Row="5" Name="Lobbies" SelectionChanged="Lobbies_SelectionChanged"/>
         <StackPanel Grid.Row="4" Orientation="Horizontal">
-            <Button Content="Pridėti kambarį" Grid.Row="2" VerticalAlignment="Center" Click="AddOffice_Click"/>
-            <Button Content="Redaguoti kambarį" Grid.Row="2" VerticalAlignment="Center" Click="EditOffice_Click"/>
-            <Button Content="Šalinti kambarį" Grid.Row="2" VerticalAlignment="Center" Click="RemoveOffice_Click" />
+            <Button Content="Pridėti kambarį" Grid.Row="2" VerticalAlignment="Center" Click="AddLobby_Click"/>
+            <Button Content="Redaguoti kambarį" Grid.Row="2" VerticalAlignment="Center" Click="EditLobby_Click"/>
+            <Button Content="Šalinti kambarį" Grid.Row="2" VerticalAlignment="Center" Click="RemoveLobby_Click" />
         </StackPanel>
         <DataGrid Grid.Row="7" Name="Stuff" SourceUpdated="Stuff_SourceUpdated" RowEditEnding="Stuff_RowEditEnding"/>
         <StackPanel Grid.Row="6" Orientation="Horizontal">

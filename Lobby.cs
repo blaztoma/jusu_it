@@ -7,29 +7,30 @@ namespace Jūsų_IT
     public class Lobby
     {
         public string Name { get; set; }
-        public string Location { get; set; }
-        public List<Stuff> Stuff { get; set; }
+        public int Number { get; set; }
+        public List<Stuff> stuff { get; set; }
 
         public Lobby()
         {
 
         }
 
-        public Lobby(string name, string location)
+        public Lobby(string name, int number)
         {
             Name = name;
-            Location = location;
-            Stuff = new List<Stuff>();
+            Number = number;
+            stuff = new List<Stuff>();
 
-            PopulateStuff();
+            //PopulateStuff();
         }
 
-        public void PopulateStuff()
+        public void PopulateStuff(string name, string model, double cost, bool IsRented, string Owner)
         {
-            Stuff.Clear();
-            Stuff.Add(new Stuff("Name", "Model", 15.2, false, ""));
-            Stuff.Add(new Stuff("Name", "Model", 15.2, false, ""));
-            Stuff.Add(new Stuff("Name", "Model", 15.2, false, ""));
+            stuff.Clear();
+            stuff.Add(new Stuff(name, model, cost, IsRented, Owner));
+            stuff.Add(new Stuff("Name", "Model", 15.2, false, ""));
+            stuff.Add(new Stuff("Name", "Model", 15.2, false, ""));
+            
         }
     }
 }
