@@ -26,24 +26,15 @@ namespace Jūsų_IT
             Location = location;
 
             lobbies = new List<Lobby>();
+            PopulateLobbies();
         }
 
-        public void PopulateLobbies(string name, int number)
+        public void PopulateLobbies()
         {
-            try
-            {
-                lobbies.Clear();
-                lobbies.Add(new Lobby("Klaipeda office Lobby " + OfficeId.ToString(), 1));
-                lobbies.Add(new Lobby(name, number));
-            }
-            catch (NullReferenceException)
-            {
-                lobbies.Add(new Lobby(name, number));
-                
-            }
-                
-            
-            
+            lobbies.Clear();
+            lobbies.Add(new Lobby("Klaipeda office Lobby " + OfficeId.ToString(), 1));
+            lobbies.Add(new Lobby("Kaunas office Lobby " + OfficeId.ToString(), 1));
+            lobbies.Add(new Lobby("Veisiejai office Lobby " + OfficeId.ToString(), 1));
         }
 
     }

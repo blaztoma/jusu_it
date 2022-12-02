@@ -21,13 +21,13 @@ namespace Jūsų_IT
             Number = number;
             stuff = new List<Stuff>();
 
-            //PopulateStuff();
+            PopulateStuff();
         }
 
-        public void PopulateStuff(string name, string model, double cost, bool IsRented, string Owner)
+        public void PopulateStuff()
         {
             stuff.Clear();
-            stuff.Add(new Stuff(name, model, cost, IsRented, Owner));
+            stuff.Add(new Stuff("Name", "Model", 15.2, false, ""));
             stuff.Add(new Stuff("Name", "Model", 15.2, false, ""));
             stuff.Add(new Stuff("Name", "Model", 15.2, false, ""));
             

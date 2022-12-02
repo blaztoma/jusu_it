@@ -163,11 +163,12 @@ namespace Jūsų_IT
         private void AddLobby_Click(object sender, RoutedEventArgs e)
         {
             LobbyEntry lobbyEntryWindow = new LobbyEntry();
-            Office office = new Office();
 
             if (lobbyEntryWindow.ShowDialog() == true)
             {
-                office.PopulateLobbies(lobbyEntryWindow.LobbyTitle.Text, Int32.Parse(lobbyEntryWindow.LobbyNumber.Text));
+                Office? selectedOffice = Offices.SelectedItem as Office;
+                selectedOffice.lobbies.Add(new Lobby(lobbyEntryWindow.LobbyTitle.Text, int.Parse(lobbyEntryWindow.LobbyNumber.Text)));
+                Lobbies.Items.Refresh();
             }
         }
 
@@ -179,6 +180,14 @@ namespace Jūsų_IT
         private void RemoveLobby_Click(object sender, RoutedEventArgs e)
         {
 
+        }
+
+        private void Offices_Loaded(object sender, RoutedEventArgs e)
+        {
+            Offices.Columns[0].Visibility = Visibility.Collapsed;
+            Offices.Columns[3].Visibility = Visibility.Collapsed;
+            Offices.Columns[1].Header = "Pavadinimas";
+            Offices.Columns[2].Header = "Adresas";
         }
     }
 

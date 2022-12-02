@@ -57,7 +57,7 @@
                        HorizontalAlignment="Center" Height="68"/>
                 </StackPanel >
 
-            <DataGrid Grid.Row="3" Name="Offices" SelectionChanged="Offices_SelectionChanged"/>
+            <DataGrid Grid.Row="3" Name="Offices" SelectionChanged="Offices_SelectionChanged" Loaded="Offices_Loaded"/>
             <StackPanel Grid.Row="2" Orientation="Horizontal">
                 <Button Content="Pridėti darbovietę" Grid.Row="2" VerticalAlignment="Center" Margin="5" Click="AddOffice_Click"/>
                 <Button Content="Redaguoti darbovietę" Grid.Row="2" VerticalAlignment="Center" Margin="5" Click="EditOffice_Click"/>
