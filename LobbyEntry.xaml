@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Jūsų_IT"
         mc:Ignorable="d"
-        Title="LobbyEntry" Height="450" Width="800">
+        Title="LobbyEntry" Height="198" Width="515">
     <Grid>
 
         <Label Content="Pavadinimas&#xD;&#xA;" HorizontalAlignment="Left" Margin="54,32,0,0" VerticalAlignment="Top" Height="26" Width="99"/>

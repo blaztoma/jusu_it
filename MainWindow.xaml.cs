@@ -104,8 +104,15 @@ namespace Jūsų_IT
             {
                 Office? selectedOffice = Offices.SelectedItem as Office;
                 int index = offices.FindIndex(s => s.OfficeId == selectedOffice.OfficeId);
-                if (index != -1) offices.RemoveAt(index);
+                if (index != -1) 
+                {
+                    selectedOffice.lobbies.Clear();
+                    offices.RemoveAt(index);
+                    
+                }
+
                 Offices.Items.Refresh();
+                Lobbies.Items.Refresh();
             }
             catch (NullReferenceException) { MessageBox.Show("Nieko Nepasirinkote!"); }
         }
@@ -138,34 +145,46 @@ namespace Jūsų_IT
             {
                 Lobbies.ItemsSource = selectedOffice.lobbies;
                 OfficeEditButton.IsEnabled = true;
+                OfficeRemoveButton.IsEnabled = true;
             }
             else
             {
                 OfficeEditButton.IsEnabled = false;
+                OfficeRemoveButton.IsEnabled = false;
             }
         }
 
         private void Lobbies_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            try
+            Lobby? selectedLobby = Lobbies.SelectedItem as Lobby;
+
+            if (selectedLobby != null && selectedLobby.stuff != null)
             {
-                Lobby? selectedLobby = Lobbies.SelectedItem as Lobby;
-                Stuff.ItemsSource = selectedLobby?.stuff;
-                Kiekis.Content = "Kiekis: " + selectedLobby?.stuff.Count.ToString();
+                Stuffs.ItemsSource = selectedLobby?.stuff;
+                Amount.Content = "Kiekis: " + selectedLobby?.stuff.Count.ToString();
+
+                LobbyEditButton.IsEnabled = true;
+                LobbyRemoveButton.IsEnabled = true;
             }
-            catch (NullReferenceException) { MessageBox.Show("Nieko Nepasirinkote"); }
+            else
+            {
+                LobbyEditButton.IsEnabled = false;
+                LobbyRemoveButton.IsEnabled = false;
+            }
+                
+            
 
         }
 
         private void Stuff_SourceUpdated(object sender, DataTransferEventArgs e)
         {
-            Kiekis.Content = Stuff.Items.Count.ToString();
+            Amount.Content = Stuffs.Items.Count.ToString();
         }
 
         private void Stuff_RowEditEnding(object sender, DataGridRowEditEndingEventArgs e)
         {
             Lobby? selectedLobby = Lobbies.SelectedItem as Lobby;
-            Kiekis.Content = "Kiekis: " + selectedLobby?.stuff.Count.ToString();
+            Amount.Content = "Kiekis: " + selectedLobby?.stuff.Count.ToString();
         }
 
         private void AddLobby_Click(object sender, RoutedEventArgs e)
@@ -182,21 +201,77 @@ namespace Jūsų_IT
 
         private void EditLobby_Click(object sender, RoutedEventArgs e)
         {
+            
+            Lobby? selectedLobby = Lobbies.SelectedItem as Lobby;
+            LobbyEntry lobbyEntryWindow = new LobbyEntry(selectedLobby.Name, selectedLobby.Number.ToString());
+
+            if (lobbyEntryWindow.ShowDialog() == true)
+            {
+                Office? selectedOffice = Offices.SelectedItem as Office;
+                int index = selectedOffice.lobbies.FindIndex(s => s.Number == selectedLobby.Number);
+
+                if (index != -1)
+                {
+                    selectedOffice.lobbies[index] = new Lobby(lobbyEntryWindow.LobbyTitle.Text, int.Parse(lobbyEntryWindow.LobbyNumber.Text));
+                    Lobbies.Items.Refresh();
+                }
+                
+            }
 
         }
 
         private void RemoveLobby_Click(object sender, RoutedEventArgs e)
         {
+            Lobby? selectedLobby = Lobbies.SelectedItem as Lobby;
+            Office? selectedOfice = Offices.SelectedItem as Office;
+
+            int index = selectedOfice.lobbies.FindIndex(s => s.Number == selectedLobby.Number);
+
+            if (index != -1)
+            {
+                
+                selectedOfice.lobbies.RemoveAt(index);
+                Lobbies.Items.Refresh();
+            }
+            
 
         }
 
+        private void AddStuff_Click(object sender, RoutedEventArgs e)
+        {
+            StuffEntry stuffEntryWindow = new StuffEntry();
+
+            if (stuffEntryWindow.ShowDialog() == true)
+            {
+                Lobby? selectedLobby = Lobbies.SelectedItem as Lobby;
+                selectedLobby.stuff.Add(new Stuff(stuffEntryWindow.StuffTitle.Text, stuffEntryWindow.StuffModel.Text, stuffEntryWindow.StuffPrice.Text, false));
+
+                Stuffs.Items.Refresh();
+            }
+        }
+
+        private void EditStuff_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void RemoveStuff_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+
         private void Offices_Loaded(object sender, RoutedEventArgs e)
         {
+            Office? office = Offices.SelectedItem as Office;
+
             Offices.Columns[0].Visibility = Visibility.Collapsed;
             Offices.Columns[3].Visibility = Visibility.Collapsed;
             Offices.Columns[1].Header = "Pavadinimas";
             Offices.Columns[2].Header = "Adresas";
         }
+
+        
     }
 
     public partial class App : Application
