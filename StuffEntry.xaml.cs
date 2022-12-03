@@ -36,16 +36,6 @@ namespace Jūsų_IT
 
         }
 
-        private void IsTaken_Checked(object sender, RoutedEventArgs e)
-        {
-            
-        }
-
-        private void TextBox_TextChanged(object sender, TextChangedEventArgs e)
-        {
-
-        }
-
         private void AddStuff_Click(object sender, RoutedEventArgs e)
         {
             Window.GetWindow(this).DialogResult = true;

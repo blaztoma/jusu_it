@@ -38,17 +38,10 @@ namespace Jūsų_IT
             Offices.ItemsSource = offices;
         }
 
-        private void TextBox_TextChanged(object sender, TextChangedEventArgs e)
-        {
-
-        }
-
         private void exit_click(object sender, RoutedEventArgs e)
         {
             Close();
         }
-
-        
 
         private void btn_open_file_Click(object sender, RoutedEventArgs e)
         {
@@ -148,6 +141,10 @@ namespace Jūsų_IT
                 Lobbies.ItemsSource = selectedOffice.lobbies;
                 OfficeEditButton.IsEnabled = true;
                 OfficeRemoveButton.IsEnabled = true;
+                Lobbies.Columns[2].Visibility = Visibility.Collapsed;
+                Lobbies.Columns[0].Header = "Pavadinimas";
+                Lobbies.Columns[1].Header = "Numeris";
+
             }
             else
             {
@@ -173,9 +170,6 @@ namespace Jūsų_IT
                 LobbyEditButton.IsEnabled = false;
                 LobbyRemoveButton.IsEnabled = false;
             }
-                
-            
-
         }
 
         private void Stuff_SourceUpdated(object sender, DataTransferEventArgs e)
@@ -247,14 +241,8 @@ namespace Jūsų_IT
             {
                 double price;
                 double.TryParse(stuffEntryWindow.StuffPrice.Text.Replace(',', '.'), NumberStyles.Any, CultureInfo.InvariantCulture, out price);
-
-
-
                 Lobby? selectedLobby = Lobbies.SelectedItem as Lobby;
                 selectedLobby.stuff.Add(new Stuff(stuffEntryWindow.StuffTitle.Text, stuffEntryWindow.StuffModel.Text, price, stuffEntryWindow.StuffIsTaken.IsChecked, stuffEntryWindow.StuffOwner.Text));
-
-                //MessageBox.Show(stuffEntryWindow.StuffPrice.GetValue);
-
                 Stuffs.Items.Refresh();
             }
         }
@@ -280,11 +268,5 @@ namespace Jūsų_IT
             Offices.Columns[2].Header = "Adresas";
         }
 
-        private void Lobbies_Loaded(object sender, RoutedEventArgs e)
-        {
-            //Lobbies.Columns[2].Visibility = Visibility.Collapsed;
-            Lobbies.Columns[0].Header = "Pavadinimas";
-            Lobbies.Columns[1].Header = "Numeris";
-        }
     }
 }
