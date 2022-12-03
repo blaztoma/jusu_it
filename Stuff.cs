@@ -8,7 +8,7 @@ namespace Jūsų_IT
     {
         public string Names { get; set; }
         public string Model { get; set; }
-        public string Price { get; set; }
+        public double Price { get; set; }
         public bool Taken { get; set; }
         public string TakenBy { get; set; }
 
@@ -17,13 +17,13 @@ namespace Jūsų_IT
 
         }
 
-        public Stuff(string name, string model, string price, bool taken)
+        public Stuff(string name, string model, double price, bool? taken, string takenby)
         {
             Names = name;
             Model = model;
             Price = price;
-            Taken = taken;
-            //TakenBy = takenby;
+            Taken = (bool)taken;
+            TakenBy = takenby;
         }
     }
 }

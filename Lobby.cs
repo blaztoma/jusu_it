@@ -27,8 +27,8 @@ namespace Jūsų_IT
         public void PopulateStuff()
         {
             stuff.Clear();
-            stuff.Add(new Stuff("Name", "Model", "12", false));
-            stuff.Add(new Stuff("Name", "Model", "15.5", false));
+            stuff.Add(new Stuff("Name", "Model", 12, false, "Petrukas"));
+            stuff.Add(new Stuff("Name", "Model", 15.5, false, "Jonulis"));
             //stuff.Add(new Stuff("Name", "Model", 15.2, false, ""));
             
         }

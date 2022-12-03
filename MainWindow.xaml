@@ -65,7 +65,7 @@
             <Button Name="OfficeEditButton" Content="Redaguoti darbovietę" Grid.Row="2" VerticalAlignment="Center" Margin="5" Click="EditOffice_Click" IsEnabled="False"/>
             <Button Name="OfficeRemoveButton" Content="Šalinti darbovietę" Grid.Row="2" VerticalAlignment="Center" Margin="5" Click="RemoveOffice_Click" IsEnabled="False" />
         </StackPanel>
-        <DataGrid Grid.Row="5" Name="Lobbies" SelectionChanged="Lobbies_SelectionChanged"/>
+        <DataGrid Grid.Row="5" Name="Lobbies" SelectionChanged="Lobbies_SelectionChanged" Loaded="Lobbies_Loaded"/>
         <StackPanel Grid.Row="4" Orientation="Horizontal">
             <Button Name="LobbyAddButton" Content="Pridėti kambarį" Grid.Row="2" Margin="5" VerticalAlignment="Center" Click="AddLobby_Click"/>
             <Button Name="LobbyEditButton" Content="Redaguoti kambarį" Grid.Row="2" Margin="5" VerticalAlignment="Center" Click="EditLobby_Click" IsEnabled="False" />

@@ -15,6 +15,8 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using System.Xml.Serialization;
+using System.Globalization;
+using static System.Net.Mime.MediaTypeNames;
 
 namespace Jūsų_IT
 {
@@ -243,8 +245,15 @@ namespace Jūsų_IT
 
             if (stuffEntryWindow.ShowDialog() == true)
             {
+                double price;
+                double.TryParse(stuffEntryWindow.StuffPrice.Text.Replace(',', '.'), NumberStyles.Any, CultureInfo.InvariantCulture, out price);
+
+
+
                 Lobby? selectedLobby = Lobbies.SelectedItem as Lobby;
-                selectedLobby.stuff.Add(new Stuff(stuffEntryWindow.StuffTitle.Text, stuffEntryWindow.StuffModel.Text, stuffEntryWindow.StuffPrice.Text, false));
+                selectedLobby.stuff.Add(new Stuff(stuffEntryWindow.StuffTitle.Text, stuffEntryWindow.StuffModel.Text, price, stuffEntryWindow.StuffIsTaken.IsChecked, stuffEntryWindow.StuffOwner.Text));
+
+                //MessageBox.Show(stuffEntryWindow.StuffPrice.GetValue);
 
                 Stuffs.Items.Refresh();
             }
@@ -271,15 +280,11 @@ namespace Jūsų_IT
             Offices.Columns[2].Header = "Adresas";
         }
 
-        
-    }
-
-    public partial class App : Application
-    {
-        private void Application_DispatcherUnhandledException(object sender, System.Windows.Threading.DispatcherUnhandledExceptionEventArgs e)
+        private void Lobbies_Loaded(object sender, RoutedEventArgs e)
         {
-            MessageBox.Show("An unhandled exception just occurred: " + e.Exception.Message, "Exception Sample", MessageBoxButton.OK, MessageBoxImage.Error);
-            e.Handled = true;
+            //Lobbies.Columns[2].Visibility = Visibility.Collapsed;
+            Lobbies.Columns[0].Header = "Pavadinimas";
+            Lobbies.Columns[1].Header = "Numeris";
         }
     }
 }
