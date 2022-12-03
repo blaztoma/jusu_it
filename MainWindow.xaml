@@ -68,21 +68,21 @@
 
         <DataGrid Grid.Row="3" Name="Offices" SelectionChanged="Offices_SelectionChanged" Loaded="Offices_Loaded"/>
         <StackPanel Grid.Row="2" Orientation="Horizontal">
-            <Button Content="Pridėti darbovietę" Grid.Row="2" VerticalAlignment="Center" Margin="5" Click="AddOffice_Click"/>
-            <Button Content="Redaguoti darbovietę" Grid.Row="2" VerticalAlignment="Center" Margin="5" Click="EditOffice_Click"/>
-            <Button Content="Šalinti darbovietę" Grid.Row="2" VerticalAlignment="Center" Margin="5" Click="RemoveOffice_Click" />
+            <Button Name="OfficeAddButton" Content="Pridėti darbovietę" Grid.Row="2" VerticalAlignment="Center" Margin="5" Click="AddOffice_Click"/>
+            <Button Name="OfficeEditButton" Content="Redaguoti darbovietę" Grid.Row="2" VerticalAlignment="Center" Margin="5" Click="EditOffice_Click" IsEnabled="False"/>
+            <Button Name="OfficeRemoveButton" Content="Šalinti darbovietę" Grid.Row="2" VerticalAlignment="Center" Margin="5" Click="RemoveOffice_Click" IsEnabled="False" />
         </StackPanel>
         <DataGrid Grid.Row="5" Name="Lobbies" SelectionChanged="Lobbies_SelectionChanged"/>
         <StackPanel Grid.Row="4" Orientation="Horizontal">
             <Button Content="Pridėti kambarį" Grid.Row="2" Margin="5" VerticalAlignment="Center" Click="AddLobby_Click"/>
-            <Button Content="Redaguoti kambarį" Grid.Row="2" Margin="5" VerticalAlignment="Center" Click="EditLobby_Click"/>
-            <Button Content="Šalinti kambarį" Grid.Row="2" Margin="5" VerticalAlignment="Center" Click="RemoveLobby_Click" />
+            <Button Content="Redaguoti kambarį" Grid.Row="2" Margin="5" VerticalAlignment="Center" Click="EditLobby_Click" IsEnabled="False"/>
+            <Button Content="Šalinti kambarį" Grid.Row="2" Margin="5" VerticalAlignment="Center" Click="RemoveLobby_Click" IsEnabled="False" />
         </StackPanel>
         <DataGrid Grid.Row="7" Name="Stuff" SourceUpdated="Stuff_SourceUpdated" RowEditEnding="Stuff_RowEditEnding"/>
         <StackPanel Grid.Row="6" Orientation="Horizontal">
             <Button Content="Pridėti daiktą" Grid.Row="2" Margin="5" VerticalAlignment="Center" Click="AddOffice_Click"/>
-            <Button Content="Redaguoti daiktą" Grid.Row="2" Margin="5" VerticalAlignment="Center" Click="EditOffice_Click"/>
-            <Button Content="Šalinti daiktą" Grid.Row="2" Margin="5" VerticalAlignment="Center" Click="RemoveOffice_Click" />
+            <Button Content="Redaguoti daiktą" Grid.Row="2" Margin="5" VerticalAlignment="Center" Click="EditOffice_Click" IsEnabled="False"/>
+            <Button Content="Šalinti daiktą" Grid.Row="2" Margin="5" VerticalAlignment="Center" Click="RemoveOffice_Click" IsEnabled="False" />
             <Label Name="Kiekis" Content="Kiekis: 0" FontSize="16" Margin="5" VerticalAlignment="Center"/>
         </StackPanel>
 

@@ -134,7 +134,15 @@ namespace Jūsų_IT
         private void Offices_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             Office? selectedOffice = Offices.SelectedItem as Office;
-            if (selectedOffice != null) Lobbies.ItemsSource = selectedOffice.lobbies;
+            if (selectedOffice != null)
+            {
+                Lobbies.ItemsSource = selectedOffice.lobbies;
+                OfficeEditButton.IsEnabled = true;
+            }
+            else
+            {
+                OfficeEditButton.IsEnabled = false;
+            }
         }
 
         private void Lobbies_SelectionChanged(object sender, SelectionChangedEventArgs e)
