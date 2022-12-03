@@ -5,79 +5,88 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Jūsų_IT"
         mc:Ignorable="d"
-        Title="MainWindow" Height="540" Width="600">
+        Title="MainWindow" Height="540" Width="600"
+        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+        TextElement.Foreground="{DynamicResource MaterialDesignBody}"
+        TextElement.FontWeight="Regular"
+        TextElement.FontSize="13"
+        TextOptions.TextFormattingMode="Ideal" 
+        TextOptions.TextRenderingMode="Auto"        
+        Background="{DynamicResource MaterialDesignPaper}"
+        FontFamily="{DynamicResource MaterialDesignFont}"        
+        >
 
-       
-            <Grid ShowGridLines="True">
-            
-                
-                    
-            <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="*"/>
-                </Grid.ColumnDefinitions>
 
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="30"/>
-                    <RowDefinition Height="60"/>
-                    <RowDefinition Height="30"/>
-                    <RowDefinition Height="101"/>
-                    <RowDefinition Height="30"/>
-                    <RowDefinition Height="121"/>
-                    <RowDefinition Height="30"/>
-                    <RowDefinition Height ="*"/>
-                </Grid.RowDefinitions>
+    <Grid ShowGridLines="True">
 
-             
-            
-            <!-- Meniu -->
-                <Menu FontSize="18" Grid.ColumnSpan="2">
 
-                    <MenuItem Header="Failas">
-                        <MenuItem Header="_Atidaryti" Click="btn_open_file_Click"/>
-                        <MenuItem Header="_Išsaugoti" Click="btn_save_file_Click"/>
-                    </MenuItem>
 
-                    <MenuItem Header="Taisa">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
 
-                        <MenuItem Header="_Pridėti darbovietę" Click="AddOffice_Click"/>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="50"/>
+            <RowDefinition Height="30"/>
+            <RowDefinition Height="50"/>
+            <RowDefinition Height="101"/>
+            <RowDefinition Height="50"/>
+            <RowDefinition Height="121"/>
+            <RowDefinition Height="50"/>
+            <RowDefinition Height ="*"/>
+        </Grid.RowDefinitions>
+
+
+
+        <!-- Meniu -->
+        <Menu FontSize="18" Grid.ColumnSpan="2">
+
+            <MenuItem Header="Failas">
+                <MenuItem Header="_Atidaryti" Click="btn_open_file_Click"/>
+                <MenuItem Header="_Išsaugoti" Click="btn_save_file_Click"/>
+            </MenuItem>
+
+            <MenuItem Header="Taisa">
+
+                <MenuItem Header="_Pridėti darbovietę" Click="AddOffice_Click"/>
                 <MenuItem Header="_Redaguoti" Click="EditOffice_Click"/>
                 <MenuItem Header="_Pašalinti" Click="RemoveOffice_Click"/>
 
-                    </MenuItem>
+            </MenuItem>
 
-                    <MenuItem Header="_Išeiti" Click="exit_click" />
+            <MenuItem Header="_Išeiti" Click="exit_click" />
 
-                </Menu>
+        </Menu>
 
 
-                <!-- Header -->
-                <StackPanel Grid.ColumnSpan="2" Grid.Row="1" Background="Orange" >
+        <!-- Header -->
+        <StackPanel Grid.ColumnSpan="2" Grid.Row="1" Background="Orange" >
+            <Label Content="Darbovietės" HorizontalAlignment="Center" FontSize="18"/>
 
-                    <TextBlock Text="Jūsų IT" FontSize="42"
-                       HorizontalAlignment="Center" Height="68"/>
-                </StackPanel >
 
-            <DataGrid Grid.Row="3" Name="Offices" SelectionChanged="Offices_SelectionChanged" Loaded="Offices_Loaded"/>
-            <StackPanel Grid.Row="2" Orientation="Horizontal">
-                <Button Content="Pridėti darbovietę" Grid.Row="2" VerticalAlignment="Center" Margin="5" Click="AddOffice_Click"/>
-                <Button Content="Redaguoti darbovietę" Grid.Row="2" VerticalAlignment="Center" Margin="5" Click="EditOffice_Click"/>
-                <Button Content="Šalinti darbovietę" Grid.Row="2" VerticalAlignment="Center" Margin="5" Click="RemoveOffice_Click" />
-            </StackPanel>
-            <DataGrid Grid.Row="5" Name="Lobbies" SelectionChanged="Lobbies_SelectionChanged"/>
+        </StackPanel >
+
+        <DataGrid Grid.Row="3" Name="Offices" SelectionChanged="Offices_SelectionChanged" Loaded="Offices_Loaded"/>
+        <StackPanel Grid.Row="2" Orientation="Horizontal">
+            <Button Content="Pridėti darbovietę" Grid.Row="2" VerticalAlignment="Center" Margin="5" Click="AddOffice_Click"/>
+            <Button Content="Redaguoti darbovietę" Grid.Row="2" VerticalAlignment="Center" Margin="5" Click="EditOffice_Click"/>
+            <Button Content="Šalinti darbovietę" Grid.Row="2" VerticalAlignment="Center" Margin="5" Click="RemoveOffice_Click" />
+        </StackPanel>
+        <DataGrid Grid.Row="5" Name="Lobbies" SelectionChanged="Lobbies_SelectionChanged"/>
         <StackPanel Grid.Row="4" Orientation="Horizontal">
-            <Button Content="Pridėti kambarį" Grid.Row="2" VerticalAlignment="Center" Click="AddLobby_Click"/>
-            <Button Content="Redaguoti kambarį" Grid.Row="2" VerticalAlignment="Center" Click="EditLobby_Click"/>
-            <Button Content="Šalinti kambarį" Grid.Row="2" VerticalAlignment="Center" Click="RemoveLobby_Click" />
+            <Button Content="Pridėti kambarį" Grid.Row="2" Margin="5" VerticalAlignment="Center" Click="AddLobby_Click"/>
+            <Button Content="Redaguoti kambarį" Grid.Row="2" Margin="5" VerticalAlignment="Center" Click="EditLobby_Click"/>
+            <Button Content="Šalinti kambarį" Grid.Row="2" Margin="5" VerticalAlignment="Center" Click="RemoveLobby_Click" />
         </StackPanel>
         <DataGrid Grid.Row="7" Name="Stuff" SourceUpdated="Stuff_SourceUpdated" RowEditEnding="Stuff_RowEditEnding"/>
         <StackPanel Grid.Row="6" Orientation="Horizontal">
-            <Button Content="Pridėti daiktą" Grid.Row="2" VerticalAlignment="Center" Click="AddOffice_Click"/>
-            <Button Content="Redaguoti daiktą" Grid.Row="2" VerticalAlignment="Center" Click="EditOffice_Click"/>
-            <Button Content="Šalinti daiktą" Grid.Row="2" VerticalAlignment="Center" Click="RemoveOffice_Click" />
-            <Label Name="Kiekis" Content="Kiekis: 0"/>
+            <Button Content="Pridėti daiktą" Grid.Row="2" Margin="5" VerticalAlignment="Center" Click="AddOffice_Click"/>
+            <Button Content="Redaguoti daiktą" Grid.Row="2" Margin="5" VerticalAlignment="Center" Click="EditOffice_Click"/>
+            <Button Content="Šalinti daiktą" Grid.Row="2" Margin="5" VerticalAlignment="Center" Click="RemoveOffice_Click" />
+            <Label Name="Kiekis" Content="Kiekis: 0" FontSize="16" Margin="5" VerticalAlignment="Center"/>
         </StackPanel>
 
     </Grid>
 
-        
+
 </Window>

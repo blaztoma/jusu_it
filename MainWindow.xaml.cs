@@ -167,7 +167,7 @@ namespace Jūsų_IT
             if (lobbyEntryWindow.ShowDialog() == true)
             {
                 Office? selectedOffice = Offices.SelectedItem as Office;
-                selectedOffice.lobbies.Add(new Lobby(lobbyEntryWindow.LobbyTitle.Text, int.Parse(lobbyEntryWindow.LobbyNumber.Text)));
+                selectedOffice?.lobbies.Add(new Lobby(lobbyEntryWindow.LobbyTitle.Text, int.Parse(lobbyEntryWindow.LobbyNumber.Text)));
                 Lobbies.Items.Refresh();
             }
         }
