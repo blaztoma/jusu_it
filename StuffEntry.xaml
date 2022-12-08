@@ -5,15 +5,15 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Jūsų_IT"
         mc:Ignorable="d"
-        Title="StuffEntry" Height="315" Width="407">
+        Title="StuffEntry" Height="335" Width="407">
     <Grid>
         <Label Content="Pavadinimas" HorizontalAlignment="Left" Margin="41,42,0,0" VerticalAlignment="Top"/>
         <Label Content="Modelis" HorizontalAlignment="Left" Margin="41,82,0,0" VerticalAlignment="Top"/>
-        <TextBox Name="StuffTitle" HorizontalAlignment="Left" Margin="135,42,0,0" TextWrapping="Wrap" Text="Lenovo kompiuteris" VerticalAlignment="Top" Width="200" TextChanged="TextBox_TextChanged"/>
-        <TextBox Name="StuffModel" HorizontalAlignment="Left" Margin="135,82,0,0" TextWrapping="Wrap" Text="ML-526" VerticalAlignment="Top" Width="200" TextChanged="TextBox_TextChanged"/>
+        <TextBox Name="StuffTitle" HorizontalAlignment="Left" Margin="135,42,0,0" TextWrapping="Wrap" Text="Lenovo kompiuteris" VerticalAlignment="Top" Width="200" />
+        <TextBox Name="StuffModel" HorizontalAlignment="Left" Margin="135,82,0,0" TextWrapping="Wrap" Text="ML-526" VerticalAlignment="Top" Width="200" />
         <Label Content="Kaina" HorizontalAlignment="Left" Margin="41,123,0,0" VerticalAlignment="Top"/>
-        <TextBox Name="StuffPrice" HorizontalAlignment="Left" Margin="135,123,0,0" TextWrapping="Wrap" Text="250.69" VerticalAlignment="Top" Width="200" TextChanged="TextBox_TextChanged"/>
-        <CheckBox Name="StuffIsTaken" Content="" HorizontalAlignment="Left" Margin="119,166,0,0" VerticalAlignment="Top"/>
+        <TextBox Name="StuffPrice" HorizontalAlignment="Left" Margin="135,123,0,0" TextWrapping="Wrap" Text="250.69" VerticalAlignment="Top" Width="200" />
+        <CheckBox Name="StuffIsTaken" Content="" HorizontalAlignment="Left" Margin="119,166,0,0" VerticalAlignment="Top" IsChecked="True" />
         <Label Content="Ar paiimtas" HorizontalAlignment="Left" Margin="41,160,0,0" VerticalAlignment="Top"/>
         <TextBox Name ="StuffOwner"  HorizontalAlignment="Left" Margin="135,193,0,0" TextWrapping="Wrap" Text="Pertas Petraitis" VerticalAlignment="Top" Width="227"/>
 
@@ -33,7 +33,7 @@
             </TextBox>
         </StackPanel>-->
 
-        <Button Content="Pridėti daiktą" HorizontalAlignment="Left" Margin="66,247,0,0" Width="176" VerticalAlignment="Top" Click="AddStuff_Click" />
+        <Button Content="Pridėti" HorizontalAlignment="Left" Margin="66,247,0,0" Width="176" VerticalAlignment="Top" Click="AddStuff_Click" />
         <Button Content="Atšaukti" HorizontalAlignment="Left" Margin="267,247,0,0" VerticalAlignment="Top" Click="CancelStuff_Click" />
         <Label Content="Vardas pavardė" HorizontalAlignment="Left" Margin="41,193,0,0" VerticalAlignment="Top" Height="26" Width="89"/>
 

@@ -8,7 +8,7 @@
         Title="OfficeEntry" Height="201" Width="516">
     <Grid>
         <Label Content="Pavadinimas&#xD;&#xA;" HorizontalAlignment="Left" Margin="54,32,0,0" VerticalAlignment="Top" Height="26" Width="99"/>
-        <Button Content="Pridėti darbovietę" HorizontalAlignment="Left" Margin="135,122,0,0" VerticalAlignment="Top" Width="176" Click="AddOffice_Click"/>
+        <Button Name="OfficeEdit_btn" Content="Pridėti darbovietę" HorizontalAlignment="Left" Margin="135,122,0,0" VerticalAlignment="Top" Width="176" Click="AddOffice_Click"/>
         <TextBox x:Name="OfficeTitle" HorizontalAlignment="Left" Margin="135,36,0,0" TextWrapping="Wrap" Text="Lazdijai office" VerticalAlignment="Top" Width="120"/>
         <Label Content="Adresas" HorizontalAlignment="Left" Margin="63,75,0,0" VerticalAlignment="Top"/>
         <TextBox x:Name="OfficeLocation" HorizontalAlignment="Left" Margin="135,79,0,0" TextWrapping="Wrap" Text="Lazdiju str. 50-37" VerticalAlignment="Top" Width="352"/>
