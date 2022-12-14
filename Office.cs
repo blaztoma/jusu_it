@@ -33,8 +33,6 @@ namespace Jūsų_IT
         {
             lobbies.Clear();
             lobbies.Add(new Lobby("Klaipeda office Lobby " + OfficeId.ToString(), 1));
-            lobbies.Add(new Lobby("Kaunas office Lobby " + OfficeId.ToString(), 1));
-            lobbies.Add(new Lobby("Veisiejai office Lobby " + OfficeId.ToString(), 1));
         }
 
     }

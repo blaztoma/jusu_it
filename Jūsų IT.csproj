@@ -9,7 +9,19 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="MeniuFoto\floppy-disk.png" />
+    <None Remove="MeniuFoto\logout.png" />
+    <None Remove="MeniuFoto\open-folder.png" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="MaterialDesignThemes" Version="4.6.1" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Resource Include="MeniuFoto\floppy-disk.png" />
+    <Resource Include="MeniuFoto\logout.png" />
+    <Resource Include="MeniuFoto\open-folder.png" />
   </ItemGroup>
 
 </Project>

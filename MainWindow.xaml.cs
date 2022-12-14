@@ -32,9 +32,6 @@ namespace Jūsų_IT
             InitializeComponent();
 
             offices.Add(new Office(1, "Kaunas office", "Student str. 50"));
-            offices.Add(new Office(2, "Klaipeda office", "Pilies str. 50"));
-            offices.Add(new Office(3, "Veisiejai","Dariaus ir Gireno str. 30"));
-
             Offices.ItemsSource = offices;
         }
 
@@ -96,51 +93,56 @@ namespace Jūsų_IT
 
         private void RemoveOffice_Click(object sender, RoutedEventArgs e)
         {
-            try
-            {
-                Office? selectedOffice = Offices.SelectedItem as Office;
-                Lobby? selectedLobby = Lobbies.SelectedItem as Lobby;
-                
-                int index = offices.FindIndex(s => s.OfficeId == selectedOffice.OfficeId);
+            
+            Office? selectedOffice = Offices.SelectedItem as Office;
+            Lobby? selectedLobby = Lobbies.SelectedItem as Lobby; 
+            int index = offices.FindIndex(s => s.OfficeId == selectedOffice.OfficeId);
 
-                if (index != -1) 
-                {//------------------------- 107 neleidzia office pasalinti -----------------------
-                    selectedLobby.stuff.Clear();    
+            if (index != -1) 
+            {//------------------------- 108 neleidzia office pasalinti -----------------------
+                try
+                {
+                    selectedLobby.stuff.Clear();
                     selectedOffice.lobbies.Clear();
-                    
                     offices.RemoveAt(index);
-                    
+                }
+                catch (NullReferenceException)
+                {
+                    if(selectedOffice.lobbies != null)
+                    {
+                        selectedOffice.lobbies.Clear();
+                        offices.RemoveAt(index);
+                    }
+                    else
+                    {
+                        offices.RemoveAt(index);
+                    }
                 }
 
                 Offices.Items.Refresh();
                 Lobbies.Items.Refresh();
                 Stuffs.Items.Refresh();
             }
-            catch (NullReferenceException) { MessageBox.Show("Nieko Nepasirinkote!"); }
+            
         }
 
         private void EditOffice_Click(object sender, RoutedEventArgs e)
         {
-            try
+            Office? selectedOffice = Offices.SelectedItem as Office;
+            OfficeEntry officeEntryWindow = new OfficeEntry(selectedOffice.OfficeId, selectedOffice.Name, selectedOffice.Location); 
+            officeEntryWindow.OfficeEdit_btn.Content = "Redaguoti darbovietę";
+
+            if (officeEntryWindow.ShowDialog() == true)
             {
-                Office? selectedOffice = Offices.SelectedItem as Office;
-                OfficeEntry officeEntryWindow = new OfficeEntry(selectedOffice.OfficeId, selectedOffice.Name, selectedOffice.Location);
-                officeEntryWindow.OfficeEdit_btn.Content = "Redaguoti darbovietę";
-
-                if (officeEntryWindow.ShowDialog() == true)
+                int index = offices.FindIndex(s => s.OfficeId == officeEntryWindow.officeId);
+                if (index != -1)
                 {
-                    int index = offices.FindIndex(s => s.OfficeId == officeEntryWindow.officeId);
-
-                    if (index != -1)
-                    {
-                        offices[index] = new Office(officeEntryWindow.officeId, officeEntryWindow.OfficeTitle.Text, officeEntryWindow.OfficeLocation.Text);
-                    }
-                    Offices.Items.Refresh();
+                    offices[index] = new Office(officeEntryWindow.officeId, officeEntryWindow.OfficeTitle.Text, officeEntryWindow.OfficeLocation.Text);
                 }
+                Offices.Items.Refresh();
             }
-            catch (NullReferenceException) { MessageBox.Show("Nieko Nepasirinkote!"); }
+            
         }
-
 
         private void Offices_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
@@ -152,9 +154,16 @@ namespace Jūsų_IT
                 OfficeRemoveButton.IsEnabled = true;
                 LobbyAddButton.IsEnabled = true;
 
-                Lobbies.Columns[2].Visibility = Visibility.Collapsed;
-                Lobbies.Columns[0].Header = "Pavadinimas";
-                Lobbies.Columns[1].Header = "Numeris";
+
+                try
+                {
+                    Lobbies.Columns[2].Visibility = Visibility.Collapsed;
+                    Lobbies.Columns[0].Header = "Pavadinimas";
+                    Lobbies.Columns[1].Header = "Numeris";
+                }
+                catch (Exception) { }
+
+                
             }
             else
             {
@@ -167,22 +176,28 @@ namespace Jūsų_IT
 
         private void Lobbies_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
+            
             Lobby? selectedLobby = Lobbies.SelectedItem as Lobby;
 
-            if (selectedLobby != null && selectedLobby.stuff != null)
+            if (selectedLobby != null)
             {
-                Stuffs.ItemsSource = selectedLobby?.stuff;
-                Amount.Content = "Kiekis: " + selectedLobby?.stuff.Count.ToString();
+                Stuffs.ItemsSource = selectedLobby.stuff;
 
                 LobbyEditButton.IsEnabled = true;
                 LobbyRemoveButton.IsEnabled = true;
                 StuffAddButton.IsEnabled = true;
 
-                Stuffs.Columns[0].Header = "Pavadinimas";
-                Stuffs.Columns[1].Header = "Modelis";
-                Stuffs.Columns[2].Header = "Kaina";
-                Stuffs.Columns[3].Header = "Paiimta";
-                Stuffs.Columns[4].Header = "Vardas pavardė";
+                try
+                {
+                    Stuffs.Columns[0].Header = "Pavadinimas";
+                    Stuffs.Columns[1].Header = "Modelis";
+                    Stuffs.Columns[2].Header = "Kaina Eurais (€)";
+                    Stuffs.Columns[3].Header = "Paiimta";
+                    Stuffs.Columns[4].Header = "Vardas pavardė";
+                }
+                catch (Exception) { }
+
+                Stuffs.Visibility = Visibility.Visible;
             }
             else
             {
@@ -190,7 +205,14 @@ namespace Jūsų_IT
                 LobbyRemoveButton.IsEnabled = false;
                 StuffAddButton.IsEnabled = false;
             }
-            Stuffs.Visibility = Visibility.Visible;
+            try 
+            {
+                Stuffs.ItemsSource = selectedLobby?.stuff;
+                StuffAmount.Content = "Kiekis: " + selectedLobby?.stuff.Count.ToString();
+            }
+            catch(Exception) { }
+            
+            
         }
 
         private void Stuffs_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -209,17 +231,6 @@ namespace Jūsų_IT
             }
         }
 
-        private void Stuff_SourceUpdated(object sender, DataTransferEventArgs e)
-        {
-            Amount.Content = Stuffs.Items.Count.ToString();
-        }
-
-        private void Stuff_RowEditEnding(object sender, DataGridRowEditEndingEventArgs e)
-        {
-            Lobby? selectedLobby = Lobbies.SelectedItem as Lobby;
-            Amount.Content = "Kiekis: " + selectedLobby?.stuff.Count.ToString();
-        }
-
         private void AddLobby_Click(object sender, RoutedEventArgs e)
         {
             LobbyEntry lobbyEntryWindow = new LobbyEntry();
@@ -234,6 +245,7 @@ namespace Jūsų_IT
                 }
             }
             catch (FormatException) { MessageBox.Show("Įvedėte ne skaičių"); }
+            catch (NullReferenceException) { MessageBox.Show("Netaisyklingai sukūrėte darbovietę! \n Prašome ją pašalinti"); }
             
         }
 
@@ -242,7 +254,7 @@ namespace Jūsų_IT
             
             Lobby? selectedLobby = Lobbies.SelectedItem as Lobby;
             LobbyEntry lobbyEntryWindow = new LobbyEntry(selectedLobby.Name, selectedLobby.Number.ToString());
-            lobbyEntryWindow.LobbyEdit_btn.Content = "Redaguoti kambarį";
+            lobbyEntryWindow.LobbyEdit_btn.Content = "Redaguoti kabinetą";
 
 
             if (lobbyEntryWindow.ShowDialog() == true)
@@ -268,19 +280,24 @@ namespace Jūsų_IT
         private void RemoveLobby_Click(object sender, RoutedEventArgs e)
         {
             Lobby? selectedLobby = Lobbies.SelectedItem as Lobby;
-            Office? selectedOfice = Offices.SelectedItem as Office;
-
-            int index = selectedOfice.lobbies.FindIndex(s => s.Number == selectedLobby.Number);
+            Office? selectedOffice = Offices.SelectedItem as Office;
+            int index = selectedOffice.lobbies.FindIndex(s => s.Number == selectedLobby.Number);
 
             if (index != -1)
             {
-                selectedLobby.stuff.Clear();
-                selectedOfice.lobbies.RemoveAt(index);
-                Lobbies.Items.Refresh();
-                Stuffs.Items.Refresh();
+                try
+                {
+                    selectedLobby?.stuff.Clear();
+                    selectedOffice.lobbies.RemoveAt(index);  
+                }
+                catch(NullReferenceException)
+                {
+                    selectedOffice.lobbies.RemoveAt(index);
+                }
             }
-            
 
+            Lobbies.Items.Refresh();
+            Stuffs.Items.Refresh();
         }
 
         private void AddStuff_Click(object sender, RoutedEventArgs e)
@@ -293,29 +310,26 @@ namespace Jūsų_IT
                 double.TryParse(stuffEntryWindow.StuffPrice.Text.Replace(',', '.'), NumberStyles.Any, CultureInfo.InvariantCulture, out price);
                 Lobby? selectedLobby = Lobbies.SelectedItem as Lobby;
 
-                selectedLobby.stuff.Add(new Stuff(stuffEntryWindow.StuffTitle.Text, stuffEntryWindow.StuffModel.Text, price, stuffEntryWindow.StuffIsTaken.IsChecked, stuffEntryWindow.StuffOwner.Text));
-                Stuffs.Items.Refresh();
+                try
+                {
+                    selectedLobby.stuff.Add(new Stuff(stuffEntryWindow.StuffTitle.Text, stuffEntryWindow.StuffModel.Text, price, stuffEntryWindow.StuffIsTaken.IsChecked, stuffEntryWindow.StuffOwner.Text));
+                    Stuffs.Items.Refresh();
+                }
+                catch (NullReferenceException) { MessageBox.Show("Negalime sukurti jūsų norimos įrangos be taisyklingai sukurto kabineto!"); }
             }
         }
 
         private void EditStuff_Click(object sender, RoutedEventArgs e)
         {
             Stuff? selectedStuff = Stuffs.SelectedItem as Stuff;
-            StuffEntry stuffEntryWindow;
-            try
-            {
-               stuffEntryWindow = new StuffEntry(selectedStuff.Names, selectedStuff.Model, selectedStuff.Price, selectedStuff.Taken, selectedStuff.TakenBy);
-            }
-            catch(NullReferenceException)
-            {
-                stuffEntryWindow = new StuffEntry(selectedStuff.Names, selectedStuff.Model, selectedStuff.Price, selectedStuff.Taken, "");
-            }
-
+            StuffEntry stuffEntryWindow = new StuffEntry();
+            stuffEntryWindow = new StuffEntry(selectedStuff.Names, selectedStuff.Model, selectedStuff.Price, selectedStuff.Taken, selectedStuff.TakenBy);
+            stuffEntryWindow.StuffEdit_btn.Content = "Redaguoti";
+            
             if (stuffEntryWindow.ShowDialog() == true)
             {
                 double price;
                 double.TryParse(stuffEntryWindow.StuffPrice.Text.Replace(',', '.'), NumberStyles.Any, CultureInfo.InvariantCulture, out price);
-
                 Lobby? selectedLobby = Lobbies.SelectedItem as Lobby;
                 int index = selectedLobby.stuff.FindIndex(s => s.Price == selectedStuff.Price);
 
@@ -328,19 +342,15 @@ namespace Jūsų_IT
                     }
                     selectedLobby.stuff[index] = new Stuff(stuffEntryWindow.StuffTitle.Text, stuffEntryWindow.StuffModel.Text, price, stuffEntryWindow.StuffIsTaken.IsChecked, stuffEntryWindow.StuffOwner.Text);
                 }
-                   catch(FormatException) { MessageBox.Show("Įvedėte ne skaičių"); }
+                catch(FormatException) { MessageBox.Show("Įvedėte ne skaičių"); }
                 Stuffs.Items.Refresh();
             }
-
-
-            }
+        }
 
             private void RemoveStuff_Click(object sender, RoutedEventArgs e)
             {
                 Lobby? selectedLobby = Lobbies.SelectedItem as Lobby;
                 Stuff? selectedStuff = Stuffs.SelectedItem as Stuff;
-
-             
                 int index = selectedLobby.stuff.FindIndex(s => s.Price == selectedStuff.Price);
 
                 if (index != -1)
@@ -350,8 +360,7 @@ namespace Jūsų_IT
                 }
             }
 
-
-        private void Offices_Loaded(object sender, RoutedEventArgs e)
+        private void OfficeLayoutUpdated(object sender, EventArgs e)
         {
             Offices.Columns[0].Visibility = Visibility.Collapsed;
             Offices.Columns[3].Visibility = Visibility.Collapsed;
@@ -360,8 +369,26 @@ namespace Jūsų_IT
 
         }
 
-        
+        private void LobbyLayoutUpdated(object sender, EventArgs e)
+        {
+            Office? selectedOffice = Offices.SelectedItem as Office;
 
+            try
+            {
+                LobbyAmount.Content = "Kiekis: " + selectedOffice.lobbies.Count.ToString();
+            }
+            catch (NullReferenceException) { }
+        }
+
+        private void StuffLayoutUpdated(object sender, EventArgs e)
+        {
+            Lobby? selectedLobby = Lobbies.SelectedItem as Lobby;
+
+            if (selectedLobby?.stuff != null)   
+            { 
+                StuffAmount.Content = "Kiekis: " + selectedLobby?.stuff.Count.ToString();
+            }
+        }
 
     }
 }

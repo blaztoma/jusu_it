@@ -9,7 +9,7 @@
     <Grid>
 
         <Label Content="Pavadinimas&#xD;&#xA;" HorizontalAlignment="Left" Margin="54,32,0,0" VerticalAlignment="Top" Height="26" Width="99"/>
-        <Button Name="LobbyEdit_btn" Content="Pridėti kambarį" HorizontalAlignment="Left" Margin="135,122,0,0" VerticalAlignment="Top" Width="176" Click="AddLobby_Click"/>
+        <Button Name="LobbyEdit_btn" Content="Pridėti kabinetą" HorizontalAlignment="Left" Margin="135,122,0,0" VerticalAlignment="Top" Width="176" Click="AddLobby_Click"/>
         <TextBox x:Name="LobbyTitle" HorizontalAlignment="Left" Margin="135,36,0,0" TextWrapping="Wrap" Text="Lazdijai Lobby" VerticalAlignment="Top" Width="120"/>
         <Label Content="Numeris" HorizontalAlignment="Left" Margin="63,75,0,0" VerticalAlignment="Top"/>
         <TextBox x:Name="LobbyNumber" HorizontalAlignment="Left" Margin="135,79,0,0" TextWrapping="Wrap" Text="37" VerticalAlignment="Top" Width="352"/>
